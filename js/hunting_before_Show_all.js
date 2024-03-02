@@ -1,15 +1,15 @@
+//console.log('hunting js')
 
-
-
-const loadPhone = async (phoneName='oppo' , isShowAll) => {
+const loadPhone = async (phoneName) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${phoneName}`);
     const data = await response.json();
     const phones = data.data
     //console.log(phones)
-    displayPhone(phones, isShowAll)
+    displayPhone(phones)
 }
-loadPhone()
-const displayPhone = (phones , isShowAll) => {
+
+const displayPhone = (phones) => {
+
     // step  : 1  get container by id
     const phoneContainer = document.getElementById('phone-container')
     //Clear phone container before search;
@@ -21,12 +21,14 @@ const displayPhone = (phones , isShowAll) => {
   }else{
     showAll.classList.add('hidden')
   }
+
+
   //This will show only 12 item (slice)
-  //console.log(phones.length)
-  //console.log('Is show all : ', isShowAll)
-  if(!isShowAll){
-    phones = phones.slice(0,12);
-  }
+  console.log(phones.length)
+  phones = phones.slice(0,12)
+
+    
+  
 
     phones.forEach(phone => {
         // step  : 2 create a div
@@ -42,8 +44,8 @@ const displayPhone = (phones , isShowAll) => {
         <div class="card-body">
           <h2 class="card-title">${phone.phone_name}</h2>
           <p>${phone.slug}</p>
-          <div class="card-actions justify-center">
-            <button class="btn btn-primary" onclick="showDetail('${phone.slug}')">Show-Details</button>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Buy Now</button>
           </div>
         </div>
         `
@@ -57,55 +59,23 @@ const displayPhone = (phones , isShowAll) => {
     //off loading spiner
     loadingSpinner(false);
 }
-
-
-//Show Detail in a modal
-
-const showDetail = async (id) => {
-  const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
-  const data = await res.json();
-  const phone_Detail = data.data;
-  showPhoneDetails(phone_Detail)
-}
-
-
-const showPhoneDetails = (phoneDetail) =>{
-  console.log(phoneDetail)
-  const phoneName = document.getElementById('show-Detail-phone-Name');
-  phoneName.innerText = phoneDetail.name;
-
-  const showDetailContainer = document.getElementById('show-Detail-container')
-  showDetailContainer.innerHTML = `
-  <img src="${phoneDetail.image}" alt="">
-  <p><span>Stroage :${phoneDetail?.mainFeatures?.
-    storage} </span></p>
-    <p>releaseDate : ${phoneDetail?.releaseDate}</p>
-    <p>Others Feature : <br>
-    Bluetooth : ${phoneDetail?.others?.Bluetooth}<br>
-    USB : ${phoneDetail?.others?.USB}<br>
-    WLAN : ${phoneDetail?.others?.Bluetooth}<br>
-    </p>
-  `
-  
-  showDetailModal.showModal()
-}
-
+loadPhone()
 
 
 const handleSearch = () => {
     const searchField = document.getElementById('searchField');
     const searchText = searchField.value;
-    //console.log(searchText)
+    console.log(searchText)
     loadPhone(searchText)
 }
 handleSearch()
 
-const handleSearch2 = (isShowAll) => {
+const handleSearch2 = () => {
 loadingSpinner(true);
 const searchField = document.getElementById('seacrh2')
 const searchText = searchField.value;
-//console.log(searchText)
-loadPhone(searchText, isShowAll)
+console.log(searchText)
+loadPhone(searchText)
 }
 
 const loadingSpinner = (isLoading) => {
@@ -118,11 +88,6 @@ const loadingSpinner = (isLoading) => {
   
 }
 
-const handleShowAll = () => {
-  handleSearch2(true);
-}
-
-
-if(document.readyState){
-  loadPhone();
-}
+// const handleShowAll = () => {
+//   handleSearch2();
+// }

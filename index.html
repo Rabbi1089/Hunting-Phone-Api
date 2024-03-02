@@ -11,19 +11,56 @@
 </head>
 
 <body class="">
-    <section class="bg-slate-100 p-3 text-center m-5">
-        <h1 class="text-xl text-center p-8">Search your phone</h1>
-        <input id="searchField" type="text" placeholder="Search here" class="input input-bordered w-full max-w-xs" />
-        <button type="submit" class="btn" onclick="handleSearch()">Search</button>
-    </section>
-    
+    <section class="bg-slate-100 p-3 text-center m-5 flex justify-center">
+        <div class=""><h1 class="text-xl text-center m-4">Search your phone</h1></div>
+        <div class="search1 flex gap-3 hidden">
+            <input id="searchField" type="text" placeholder="Search here"
+                class="input input-bordered w-full max-w-xs" />
+            <button type="submit" class="btn" onclick="handleSearch()">Search</button>
+        </div>
 
-    <section class="flex justify-center">
-        <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="seacrh2 flex gap-3">
+            <input id="seacrh2" type="text" placeholder="Search here" class="input input-bordered w-full max-w-xs" />
+            <button type="submit" class="btn" onclick="handleSearch2()">Search here</button>
+        </div>
+
+    </section>
+
+    <!-- search result -->
+    <section class="">
+        <div id="loading-spinner" class="spinner text-fuchsia-700 flex justify-center hidden">
+            <span class="loading loading-spinner loading-xs"></span>
+<span class="loading loading-spinner loading-sm"></span>
+<span class="loading loading-spinner loading-md"></span>
+<span class="loading loading-spinner loading-lg"></span>
+        </div>
+        <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-10">
         </div>
     </section>
+    <div id="show-all" class="hidden flex justify-end p-8">
+        <button class="btn btn-accent" onclick="handleShowAll()">Show all</button>
+    </div>
+<!-- 
+    modal section start here -->
 
-    <script src="js/hunting.js"></script>
-</body>
+    <!-- Open the modal using ID.showModal() method -->
 
+<dialog id="showDetailModal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 id="show-Detail-phone-Name" class="font-bold text-lg">Hello!</h3>
+    <div id="show-Detail-container">
+
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+    <script src="js/hunting.js"></script
 </html>
+
+
